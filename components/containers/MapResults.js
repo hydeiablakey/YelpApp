@@ -8,7 +8,11 @@ export default class MapResults extends Component {
 		const coordinateItems = markers.map((item) => (
 				<div>
 
-			 <Marker className="marker-item" position={{lat: item.coordinates.latitude, lng: item.coordinates.longitude  }} key={`tomodachi_${Math.random()* (new Date())}`} />
+			 <Marker  
+			 	onClick={this._onZoom}
+			  className="marker-item" 
+			  position={{lat: item.coordinates.latitude, lng: item.coordinates.longitude  }} 
+			  key={`tomodachi_${Math.random()* (new Date())}`} />
 
 				</div>
 
@@ -18,8 +22,8 @@ export default class MapResults extends Component {
 	const MyMapComponent = withScriptjs( withGoogleMap( ( props ) =>
 	(<div>
   	<GoogleMap
-	    defaultZoom={9}
-	    defaultCenter={{ lat: 40.83622, lng: -73.85488}}
+	    defaultZoom={5}
+	    defaultCenter={{ lat: 40.83622, lng:  -73.85488}}
 	  >
 
 	  	{coordinateItems}
@@ -27,8 +31,15 @@ export default class MapResults extends Component {
 	  		{/*<Marker position={{lat: 40.83622, lng: -73.85488 }} />
 	      <Marker position={{lat: 40.827751, lng: -73.850389  }} />*/}
   	</GoogleMap>
+
 	</div>)
  	));
+		/*
+ 		_onZoom = () => {
+			coordinateItems.setZoom(8);
+			
+		}
+		*/
  	
 
 
