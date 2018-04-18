@@ -1,3 +1,77 @@
 body {
 	background-color: pink;
 }
+
+.App-container {
+	text-align: center;
+
+}
+.alignment {
+	display:grid;
+	grid-auto-flow: dense;
+	grid-template-columns: 1fr 1fr;
+	grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+	grid-template-areas: 
+	"results  map "
+	"results  map "
+	"results  map "
+	"results  map "
+	"results  map ";
+	height: 400px;
+	border: 3px solid white;
+}
+/*
+Form Search Bar Styles
+*/
+
+.Form {
+	margin: 5px;
+
+
+}
+
+.inputSearch_term {
+	width: 40%;
+	height:20px;
+	border: 1px solid;
+	outline: none;
+	box-shadow: 0px 0px 20px 0px #AAA;
+
+
+}
+
+.locationSearch_term {
+	width: 40%;
+	height: 20px;
+	border: 1px solid;
+	outline: none;
+	box-shadow: 0px 0px 20px 0px #AAA;
+
+
+}
+
+.submitButton {
+	border: 1px solid;
+	height: 24px;
+	position: relative;
+	bottom: 1px;
+
+}
+
+/*
+Containers Stylin
+*/
+
+.item{
+	border-top: 1px solid;
+}
+.Map_Results-Container {
+	grid-area: map;
+
+	border: 1px solid black;
+}
+.Search_Results-Container {
+	grid-area: results; 
+	border: 1px solid black;
+	overflow: scroll; 
+}
