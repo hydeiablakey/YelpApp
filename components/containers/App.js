@@ -9,14 +9,17 @@ import './App.less';
 export default class App extends Component {
 	constructor() {
 		super()
-		this.state = ({response: []})
+		this.state = ({
+			response: [],
+			term: "",
+			location: "",
+		})
 	}
 
 	
-	_handleRequest = (event) => {
-		event.preventDefault();
+	_handleRequest = (term, location) => {
 		let corsProxy = 'http://localhost:3333';
-		let url = 'https://api.yelp.com/v3/businesses/search?term=restaurants&location=10473';
+		let url = `https://api.yelp.com/v3/businesses/search?term=${term}&location=${location}&limit=5`;
 
 		axios({
 		  method:'get',
@@ -27,12 +30,28 @@ export default class App extends Component {
 			},
 		  responseType:'json'
 		})
+
 		.then( ( response ) => {
 			this.setState({ response: response.data.businesses })
 		  console.log( this.state.response );
 		})
+
 		.catch( ( error ) => {
 			console.error( error );
+		})
+
+	}
+
+	_handleSearch = (event) => {
+		event.preventDefault();
+		const termQuery = event.target.getElementsByTagName('input')[0].value;
+		const locationQuery = event.target.getElementsByTagName('input')[1].value;
+		console.log("Term: " + termQuery);
+		console.log("Location: " + locationQuery);
+		this._handleRequest(termQuery, locationQuery); 
+		this.setState({
+			term: termQuery, 
+			location: locationQuery
 		})
 	}
 
@@ -41,10 +60,12 @@ export default class App extends Component {
 			<div className="App-container">
 
 				<p>Let's begin here.</p>
+				<SearchBar handleSearch={this._handleSearch} handleRequest={this._handleRequest} />
 
-				<SearchBar handleRequest={this._handleRequest} />
-				<SearchResults response={ this.state.response } />
-				<MapResults />
+			 	<div className="alignment">
+			 		<SearchResults response={ this.state.response } />
+					<MapResults markers={this.state.response} />
+			 	</div>
 
 			</div>
 		);
