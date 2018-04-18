@@ -10,6 +10,7 @@ export default class SearchResults extends Component {
 				<p>{ item.name }</p>
 				<p> Price range: {item.price}</p>
 				<p> Location: {item.location.address1}</p>
+				<SearchResultItem imageSrc={ item.image_url } />
 			</ul>
 			));
 
