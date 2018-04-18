@@ -13,6 +13,10 @@ export default class App extends Component {
 			response: [],
 			term: "",
 			location: "",
+			center: { 
+				lat: 40.854131, 
+				lng: -73.886601
+			}
 		})
 	}
 
@@ -31,9 +35,19 @@ export default class App extends Component {
 		  responseType:'json'
 		})
 
+
+		//center corresponds to the center of the map from the API based on the search term. 
 		.then( ( response ) => {
-			this.setState({ response: response.data.businesses })
-		  console.log( this.state.response );
+			let center = response.data.region.center;
+			this.setState({ 
+				response: response.data.businesses,
+				center: {
+					lat: center.latitude, 
+					lng: center.longitude
+				}
+			})
+
+		    console.log( this.state.response );
 		})
 
 		.catch( ( error ) => {
@@ -64,7 +78,7 @@ export default class App extends Component {
 
 			 	<div className="alignment">
 			 		<SearchResults response={ this.state.response } />
-					<MapResults markers={this.state.response} />
+					<MapResults center={ this.state.center } markers={this.state.response} />
 			 	</div>
 
 			</div>

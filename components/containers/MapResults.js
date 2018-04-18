@@ -6,42 +6,29 @@ export default class MapResults extends Component {
 		const { markers } = this.props; 
 
 		const coordinateItems = markers.map((item) => (
-				<div>
-
-			 <Marker  
-			 	onClick={this._onZoom}
-			  className="marker-item" 
-			  position={{lat: item.coordinates.latitude, lng: item.coordinates.longitude  }} 
-			  key={`tomodachi_${Math.random()* (new Date())}`} />
-
-				</div>
-
+				 <Marker  
+				 	onClick={this._onZoom}
+				  className="marker-item" 
+				  position={{lat: item.coordinates.latitude, lng: item.coordinates.longitude  }} 
+				  key={`tomodachi_${Math.random()* (new Date())}`} 
+				 />
 			));
 
 
 	const MyMapComponent = withScriptjs( withGoogleMap( ( props ) =>
-	(<div>
-  	<GoogleMap
-	    defaultZoom={5}
-	    defaultCenter={{ lat: 40.83622, lng:  -73.85488}}
-	  >
+		(<div>
+	  	<GoogleMap
+		    defaultZoom={9}
+		    center={ this.props.center }
+		  >
 
-	  	{coordinateItems}
+		  	{coordinateItems}
 
-	  		{/*<Marker position={{lat: 40.83622, lng: -73.85488 }} />
-	      <Marker position={{lat: 40.827751, lng: -73.850389  }} />*/}
-  	</GoogleMap>
-
-	</div>)
- 	));
-		/*
- 		_onZoom = () => {
-			coordinateItems.setZoom(8);
-			
-		}
-		*/
- 	
-
+		  		{/*<Marker position={{lat: 40.83622, lng: -73.85488 }} />
+		      <Marker position={{lat: 40.827751, lng: -73.850389  }} />*/}
+	  	</GoogleMap>
+		</div>)
+	 	));
 
 		return (
 		 <div className="Map_Results-Container">
@@ -55,8 +42,6 @@ export default class MapResults extends Component {
 
 			{coordinateItems}
 		 </div>
-
-
-		)
+		);
 	}
 }
