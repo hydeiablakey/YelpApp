@@ -78,7 +78,7 @@ export default class App extends Component {
 
 			 	<div className="alignment">
 			 		<SearchResults response={ this.state.response } />
-					<MapResults center={ this.state.center } markers={this.state.response} />
+					<MapResults  center={ this.state.center } markers={this.state.response} />
 			 	</div>
 
 			</div>
