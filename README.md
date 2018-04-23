@@ -34,6 +34,7 @@ Dependencies
     "react": "16.2.0",
     "react-dom": "16.2.0",
     "react-google-maps": "^9.4.5",
+    "recompose": "^0.27.0",
     "webpack": "3.10.0",
     "webpack-cli": "2.0.9",
     "webpack-dev-server": "3.0.0",
