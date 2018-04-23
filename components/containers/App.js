@@ -16,7 +16,8 @@ export default class App extends Component {
 			center: { 
 				lat: 40.854131, 
 				lng: -73.886601
-			}
+			},
+			defaultZoom: 9
 		})
 	}
 
@@ -44,7 +45,8 @@ export default class App extends Component {
 				center: {
 					lat: center.latitude, 
 					lng: center.longitude
-				}
+				},
+				defaultZoom: 11
 			})
 
 		    console.log( this.state.response );
@@ -73,12 +75,13 @@ export default class App extends Component {
 		return (
 			<div className="App-container">
 
-				<p>Let's begin here.</p>
+				<p className="App_title">Placeholder</p>
+
 				<SearchBar handleSearch={this._handleSearch} handleRequest={this._handleRequest} />
 
 			 	<div className="alignment">
 			 		<SearchResults response={ this.state.response } />
-					<MapResults  center={ this.state.center } markers={this.state.response} />
+					<MapResults  defaultzoom= {this.state.defaultZoom} center={ this.state.center } markers={this.state.response} />
 			 	</div>
 
 			</div>

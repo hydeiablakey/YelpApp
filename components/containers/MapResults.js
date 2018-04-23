@@ -1,52 +1,62 @@
 import React, {Component} from 'react';
-import { withScriptjs, withGoogleMap, GoogleMap, Marker } from 'react-google-maps';
-import ReactTooltip from 'react-tooltip';
-
+import { withScriptjs, withGoogleMap, GoogleMap, Marker, InfoWindow } from 'react-google-maps';
+import { compose, withStateHandlers } from 'recompose';
 
 export default class MapResults extends Component {
 
 render() {
 	const { markers } = this.props; 
-	const { MarkerWithLabel } = require("react-google-maps/lib/components/addons/MarkerWithLabel");
 
+	const MyMapComponent =  compose(
+		withStateHandlers(() => ({ 
+					isOpen: false,
+				}), {
+		onToggleOpen: ({ isOpen }) => () => ({
+						isOpen: !isOpen,
+					})
+				}),
 
-	const coordinateItems = markers.map(( item ) => {
-		let id = `tomodachi_${ Math.random()* (new Date()) }`;
+		withScriptjs,
+		withGoogleMap
+		)( ( props ) => 
+			<div>
+		  	<GoogleMap
+			    defaultZoom={ this.props.defaultzoom }
+			    center={ this.props.center }
+			    className="GoogleMap"
+			  >
 
-		return (
-			<div key={ `marker_${ id }` }>
-					<MarkerWithLabel 
-					  	className="marker-item"
-					  	position={{lat: item.coordinates.latitude, lng: item.coordinates.longitude  }}
-					  	labelAnchor={new google.maps.Point(0, 0)}
-					  	labelStyle={{backgroundColor: "white", fontSize: "12px", padding: "8px", border: "1px solid pink", display: "none"}} 
-					>
-					<div className="marker_label_text">{item.name}</div>
-					</MarkerWithLabel>
-			</div>
-			);
-		});
+			  { markers.map(( item ) => {
+					let id = `tomodachi_${ Math.random()* (new Date()) }`;
 
+					return (
+						<div key={ `marker_${ id }` }>
+								<Marker 
+								  	className="marker-item"
+								  	position={{lat: item.coordinates.latitude, lng: item.coordinates.longitude  }}
+								  	labelAnchor={new google.maps.Point(0, 0)}
+								  	onClick={props.onToggleOpen}	
+								>
 
-
-	const MyMapComponent = withScriptjs( withGoogleMap( ( props ) =>
-		(<div>
-	  	<GoogleMap
-		    defaultZoom={9}
-		    center={ this.props.center }
-		    className="i"
-		  >
-		  	{coordinateItems}
-
-	  	</GoogleMap>
-		</div>)
-	 	));
+								{props.isOpen && <InfoWindow onCloseClick={props.onToggleOpen}>
+	
+								<div className="marker_label_text">{item.name}</div>
+			      		</InfoWindow>}
+			      		
+								</Marker>
+						</div>
+					);
+				})
+		  }
+		  </GoogleMap>
+		</div>
+		);
 
 	return (
 		 <div className="Map_Results-Container">
 			<MyMapComponent
 			  isMarkerShown
-			  googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places"
+			  googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyDFDYz4Wa7MQr1NaXIy2CAdEa1_pqcU6AY&v=3.exp&libraries=geometry,drawing,places"
 			  loadingElement={<div style={{ height: `100%` }} />}
 			  containerElement={<div style={{ height: `400px` }} />}
 			  mapElement={<div style={{ height: `100%` }} />}
