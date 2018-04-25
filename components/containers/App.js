@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import SearchResults from './SearchResults';
-import MapResults from './MapResults';
+import MapResults from '../presentational/MapResults';
 import SearchBar from '../presentational/SearchBar';
 import './App.less';
 
@@ -13,6 +13,11 @@ export default class App extends Component {
 			response: [],
 			term: "",
 			location: "",
+			center: { 
+				lat: 40.854131, 
+				lng: -73.886601
+			},
+			defaultZoom: 9
 		})
 	}
 
@@ -31,9 +36,20 @@ export default class App extends Component {
 		  responseType:'json'
 		})
 
+
+		//center corresponds to the center of the map from the API based on the search term. 
 		.then( ( response ) => {
-			this.setState({ response: response.data.businesses })
-		  console.log( this.state.response );
+			let center = response.data.region.center;
+			this.setState({ 
+				response: response.data.businesses,
+				center: {
+					lat: center.latitude, 
+					lng: center.longitude
+				},
+				defaultZoom: 11
+			})
+
+		    console.log( this.state.response );
 		})
 
 		.catch( ( error ) => {
@@ -58,13 +74,11 @@ export default class App extends Component {
 	render() {
 		return (
 			<div className="App-container">
-
-				<p>Let's begin here.</p>
+				<p className="App_title">.</p>
 				<SearchBar handleSearch={this._handleSearch} handleRequest={this._handleRequest} />
-
 			 	<div className="alignment">
 			 		<SearchResults response={ this.state.response } />
-					<MapResults markers={this.state.response} />
+					<MapResults  defaultzoom= {this.state.defaultZoom} center={ this.state.center } markers={this.state.response} />
 			 	</div>
 
 			</div>
