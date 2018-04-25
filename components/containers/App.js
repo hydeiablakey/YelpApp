@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import SearchResults from './SearchResults';
-import MapResults from './MapResults';
+import MapResults from '../presentational/MapResults';
 import SearchBar from '../presentational/SearchBar';
 import './App.less';
 
@@ -74,11 +74,8 @@ export default class App extends Component {
 	render() {
 		return (
 			<div className="App-container">
-
-				<p className="App_title">Placeholder</p>
-
+				<p className="App_title">.</p>
 				<SearchBar handleSearch={this._handleSearch} handleRequest={this._handleRequest} />
-
 			 	<div className="alignment">
 			 		<SearchResults response={ this.state.response } />
 					<MapResults  defaultzoom= {this.state.defaultZoom} center={ this.state.center } markers={this.state.response} />
