@@ -5,7 +5,7 @@ export default class SearchResultItem extends Component {
 	render() {
 		return (	
 			<div className="searchResultItem_container">
-			<img className="item_Images" src={`${ this.props.imageSrc }`} / >
+			<img className="item_Images" src={`${ this.props.imageSrc }`} />
 			</div>
 		);
 	}

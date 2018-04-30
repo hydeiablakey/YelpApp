@@ -1,6 +1,8 @@
 YelpApp
 =======
 
+![alt text](https://github.com/hydeiablakey/YelpApp/blob/test-branch/img/yelpDemo.png)
+
 This is an app that I've created using the Yelp API and Google Maps API. This app will allow you to search for
 anything such as Restaurants, Car Washes, Movie Theaters, etc.
 
@@ -29,7 +31,6 @@ Dependencies
 ```
     "axios": "^0.18.0",
     "cors-anywhere": "^0.4.1",
-    "node-fetch": "^2.1.2",
     "normalize.css": "^8.0.0",
     "react": "16.2.0",
     "react-dom": "16.2.0",

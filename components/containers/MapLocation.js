@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { withScriptjs, withGoogleMap, GoogleMap, Marker, InfoWindow } from 'react-google-maps';
 
-export default class MapLocation extends Component {
+export default class MapLocations extends Component {
 	constructor() {
 		super()
 		this.state = ({
@@ -31,8 +31,16 @@ export default class MapLocation extends Component {
 				  	onClick={this._handleOnClick}
 				 >
 
-					{this.state.isOpen && <InfoWindow onCloseClick={this._handleOnCloseClick}>
-						<div className="marker_label_text"> { this.props.name } </div>
+					{this.state.isOpen && 
+						<InfoWindow onCloseClick={this._handleOnCloseClick}>
+						<div className="marker_label_text">
+
+						 <p className="name_marker">{ this.props.name }</p>
+						 <img className="marker_img" src={`${ this.props.imageSrc }`} />
+						 <span className="city_state_marker">   { this.props.city}, {this.props.state} </span> 
+						 <p> Rating: {this.props.rating}</p>
+
+						</div>
 					</InfoWindow> }
 				</Marker>
 			</div>
