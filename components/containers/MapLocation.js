@@ -34,8 +34,10 @@ export default class MapLocations extends Component {
 					{this.state.isOpen && 
 						<InfoWindow onCloseClick={this._handleOnCloseClick}>
 						<div className="marker_label_text">
-						 <p>{ this.props.name }</p>
-						 <span> { this.props.city}, {this.props.state} {this.props.zip} </span> 
+
+						 <p className="name_marker">{ this.props.name }</p>
+						 <img className="marker_img" src={`${ this.props.imageSrc }`} />
+						 <span className="city_state_marker">   { this.props.city}, {this.props.state} </span> 
 						 <p> Rating: {this.props.rating}</p>
 
 						</div>

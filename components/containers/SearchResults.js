@@ -19,7 +19,7 @@ export default class SearchResults extends Component {
 		if (response.length > 0) {
 			return (
 			<div className="Search_Results-Container">
-			<p className="searchResults_title">Search Results:</p>
+			<p className="searchResults_title">Search Results: {this.props.term}</p>
 			{ listItems }
 			<SearchResultButtons />
 			</div>

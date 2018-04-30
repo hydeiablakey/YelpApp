@@ -80,7 +80,7 @@ export default class App extends Component {
 			  </div>
 				<SearchBar handleSearch={this._handleSearch} handleRequest={this._handleRequest} />
 			 	<div className="alignment">
-			 		<SearchResults response={ this.state.response } />
+			 		<SearchResults term={this.state.term} response={ this.state.response } />
 					<MapResults  defaultzoom= {this.state.defaultZoom} center={ this.state.center } markers={this.state.response} />
 			 	</div>
 

@@ -13,7 +13,15 @@ export default class MapResults extends Component {
 				  	position={{lat: item.coordinates.latitude, lng: item.coordinates.longitude  }}
 				  	labelAnchor={new google.maps.Point(0, 0)}
 				  	key={ `marker_${ id }` } 
-				  	name={ item.name } />
+				  	name={ item.name }
+				  	address={item.location.address1}
+				  	city={item.location.city}
+				  	state={item.location.state}
+				  	rating={item.rating}
+				  	imageSrc={item.image_url}
+
+
+				  	/>
 			);
 		});
 
