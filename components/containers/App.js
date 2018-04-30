@@ -74,7 +74,10 @@ export default class App extends Component {
 	render() {
 		return (
 			<div className="App-container">
-				<p className="App_title">.</p>
+			<div className="triangle"></div>
+			  <div className="logoBox"> 
+				<p className="logo_title">Begin the search for items here.</p>
+			  </div>
 				<SearchBar handleSearch={this._handleSearch} handleRequest={this._handleRequest} />
 			 	<div className="alignment">
 			 		<SearchResults response={ this.state.response } />
