@@ -25,7 +25,7 @@ export default class MapLocations extends Component {
 		return (
 		 	<div>
 				<Marker 
-				  	className="marker-item"
+				  	className="marker"
 				  	position={this.props.position}
 				  	labelAnchor={this.props.labelAnchor}
 				  	onClick={this._handleOnClick}
@@ -34,11 +34,12 @@ export default class MapLocations extends Component {
 					{this.state.isOpen && 
 						<InfoWindow onCloseClick={this._handleOnCloseClick}>
 						<div className="marker_label_text">
-
 						 <p className="name_marker">{ this.props.name }</p>
 						 <img className="marker_img" src={`${ this.props.imageSrc }`} />
-						 <span className="city_state_marker">   { this.props.city}, {this.props.state} </span> 
+						 <span className="city_state_marker">{ this.props.city}, {this.props.state} </span> 
+
 						 <p> Rating: {this.props.rating}</p>
+						 
 
 						</div>
 					</InfoWindow> }

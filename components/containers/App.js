@@ -24,7 +24,7 @@ export default class App extends Component {
 	
 	_handleRequest = (term, location) => {
 		let corsProxy = 'http://localhost:3333';
-		let url = `https://api.yelp.com/v3/businesses/search?term=${term}&location=${location}&limit=5`;
+		let url = `https://api.yelp.com/v3/businesses/search?term=${term}&location=${location}&limit=10`;
 
 		axios({
 		  method:'get',
