@@ -17,6 +17,7 @@ export default class MapResults extends Component {
 				  	address={item.location.address1}
 				  	city={item.location.city}
 				  	state={item.location.state}
+				  	zipcode={item.location.zip_code}
 				  	rating={item.rating}
 				  	imageSrc={item.image_url}
 

@@ -8,7 +8,19 @@ export default class SearchResults extends Component {
 		//some sort of logic here that spits out a color
 		// this will generate a hed value
 
-		return '#000';
+		if ( rating > 0 && rating < 2 ) {
+			return '#F0152D';
+
+		} else if (rating >=2 && rating < 3) {
+			return '#F08E2D'
+		} else if (rating >=3 && rating < 4 ) {
+			return '#F0B52D'
+		} else if (rating >=4 &&  rating < 5 ) {
+			return '#6AA82A'
+		} else {
+			return '##1EA82A'
+		}
+
 	}
 
 	render() {
@@ -19,7 +31,7 @@ export default class SearchResults extends Component {
 			console.log(rating);
 
 			// if (rating > 0 && rating <= 1 ) {
-			// 	document.getElementById()
+
 			// }
 
 			return (
