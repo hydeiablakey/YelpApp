@@ -68,7 +68,9 @@ Maping
 */
 
 //Map Results
-
+.city_state_marker {
+	display:block;
+}
 .marker_img {
 	width: 100px;
 	height: 100px;
@@ -76,8 +78,15 @@ Maping
 	border: 1px solid;
 }
 
+.marker {
+	background-color:yellow;
+}
 
-
+.name_marker {
+	display:block;
+	margin:5px;
+	float:right;
+}
 
 //SearchBar
 
@@ -117,8 +126,14 @@ Maping
 
 }
 
-
 // Search Results
+
+.greenishIndicator {
+	width: 50px;
+	height:25px;
+	background-color:#FFCA00;
+	float: right;
+}
 
 .prompt {
 	position: relative;
@@ -136,14 +151,37 @@ Maping
 	font-family: 'Poppins';
 	text-align: center;
 }
-.searchItem{
-	border-top: 1px solid;
+
+.searchItems {
+	padding: 0;
+
 }
+.searchItem{
+	border-top: 1px solid #DBD4D0;
+}
+
+
 
 .searchResults_title {
 	font-family: 'Poppins';
 
+}
 
+.rating {
+	float:right;
+
+}
+
+.searchName {
+	margin: 6px;
+}
+
+.searchItem {
+	padding: 10px;
+}
+
+.searchName:hover {
+	color:#CC7C7E;
 }
 
 /*
@@ -162,4 +200,5 @@ Container Styles
 	background-color: #F0F1F2;
 	grid-area: results; 
 	overflow: scroll; 
+
 }

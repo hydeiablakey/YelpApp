@@ -1,7 +1,7 @@
 YelpApp
 =======
 
-![alt text](https://github.com/hydeiablakey/YelpApp/blob/test-branch/img/yelpDemo.png)
+![alt text](https://github.com/hydeiablakey/YelpApp/blob/test-branch/img/yelp_app_demo.png)
 
 This is an app that I've created using the Yelp API and Google Maps API. This app will allow you to search for
 anything such as Restaurants, Car Washes, Movie Theaters, etc.
