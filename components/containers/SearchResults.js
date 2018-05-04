@@ -3,8 +3,6 @@ import SearchResultButtons from '../presentational/SearchResultButtons';
 
 
 export default class SearchResults extends Component {
-
-//work on getting a map element to display on click for a search result.
 	_getColor = ( rating ) => {
 		
 		if ( rating > 0 && rating < 2 ) {
@@ -18,20 +16,14 @@ export default class SearchResults extends Component {
 		} else {
 			return '#1EA82A'
 		}
-
 	}
 
 	render() {
 		const { response, onItemClick } = this.props;
-
 		const listItems = response.map(( item ) => {
 			const rating = item.rating;
 			const name = item.name;
 			const id = item.id; 
-
-			//console.log(rating); debugging'
-
-			//OnItemClick is grabbing the ID from the Parent app.js  when clicking on a searchresult item. 
 			return (
 				<li className="searchItem" key={ `Sumimasen_${ Math.random() * (new Date()) }` }> 
 					<span  onClick={ onItemClick( id ) } className="searchName">{ name }</span>
@@ -39,11 +31,7 @@ export default class SearchResults extends Component {
 				</li>
 			)
 		})
-
-
 		
-
-		//response will always exist as it's being passed down first as an empty array. 
 		if (response.length > 0) {
 			return (
 			<div className="Search_Results-Container">

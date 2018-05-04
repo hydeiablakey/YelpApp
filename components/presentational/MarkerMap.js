@@ -10,14 +10,12 @@ export default class MarkerMap extends Component {
 					center={ this.props.center }
 					className="i"
 				>
-					{ this.props.children }
+				{ this.props.children }
 
 				</GoogleMap>
 		  </div>
 		)
-
-	));
-
+	));	 
 	return (
 		<div className="Map_Results-Container">
 			<MyMapComponent

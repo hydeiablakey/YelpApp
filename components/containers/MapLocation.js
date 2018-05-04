@@ -4,21 +4,10 @@ import { withScriptjs, withGoogleMap, GoogleMap, Marker, InfoWindow } from 'reac
 export default class MapLocation extends Component {
 	constructor( props ) {
 		super( props )
-		//Checks if the isSelected prop is true or false. Set to false by default. So if the name is clicked, 
-		//the marker should appear in map results.
-
 		this.state = ( {
 			isOpen: props.isSelected || false,
 		} )
 	}
-
-
-	// _handleSearchOnClick = () => {
-	// 	if (this.props.itemID == `marker_${this.props.itemID}`) {
-	// 		const markerEl = document.getElementById('marker'); 
-	// 		this.setState({ isOpen: true });
-	// 	} 
-	// }
  
 	_handleOnClick = () => {
 		this.setState({ isOpen: true }); 
@@ -29,7 +18,6 @@ export default class MapLocation extends Component {
 			isOpen: false
 		});	
 	}
-
 
 	render() {
 		return (

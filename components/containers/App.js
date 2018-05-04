@@ -38,8 +38,6 @@ export default class App extends Component {
 		  responseType:'json'
 		})
 
-
-		//center corresponds to the center of the map from the API based on the search term. 
 		.then( ( response ) => {
 			let center = response.data.region.center;
 			this.setState({ 
@@ -50,13 +48,11 @@ export default class App extends Component {
 				},
 				defaultZoom: 11
 			})
-		    //console.log("Response: ", this.state.response );
 		})
 
 		.catch( ( error ) => {
 			console.error( error );
 		})
-
 	}
 
 	_handleSearch = (event) => {
@@ -85,8 +81,8 @@ export default class App extends Component {
 
 				return (
 					<MapLocation 
-						markerID={ `marker_${ id }` } //ID from the restaurant with marker. 
-						itemID={ this.state.selectedId } //ID from the item being searched
+						markerID={ `marker_${ id }` } 
+						itemID={ this.state.selectedId } 
 				  	position={{lat: item.coordinates.latitude, lng: item.coordinates.longitude  }}
 				  	labelAnchor={new google.maps.Point(0, 0)}
 				  	key={ `marker_${ id }` } 
@@ -101,7 +97,7 @@ export default class App extends Component {
 				);
 		});
 
-		console.log("coordinateItems", coordinateItems)
+		
 		return coordinateItems;
 	} 
 
