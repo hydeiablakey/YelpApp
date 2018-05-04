@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import SearchResults from './SearchResults';
-import MapResults from '../presentational/MapResults';
 import SearchBar from '../presentational/SearchBar';
+import MarkerMap from '../presentational/MarkerMap';
+import MapLocation from './MapLocation';
 import './App.less';
 
 
@@ -18,8 +19,7 @@ export default class App extends Component {
 				lng: -73.886601
 			},
 			defaultZoom: 9,
-			id: '',
-			selectedId: '',
+			selectedId: ''
 		})
 	}
 	
@@ -48,10 +48,9 @@ export default class App extends Component {
 					lat: center.latitude, 
 					lng: center.longitude
 				},
-				defaultZoom: 11,
-				id: response.id
+				defaultZoom: 11
 			})
-		    console.log("Response: ", this.state.response );
+		    //console.log("Response: ", this.state.response );
 		})
 
 		.catch( ( error ) => {
@@ -59,8 +58,6 @@ export default class App extends Component {
 		})
 
 	}
-
-
 
 	_handleSearch = (event) => {
 		event.preventDefault();
@@ -77,29 +74,53 @@ export default class App extends Component {
 
 	_onItemClick = ( termId ) => ( event ) => {
 		this.setState({
-			selectedId: termId,
+			selectedId: termId
 		})
 	}
+
+	_getCoordinateItems = () => {
+			const markers = this.state.response;
+			const coordinateItems = markers.map( ( item ) => {
+				let id = item.id;
+
+				return (
+					<MapLocation 
+						markerID={ `marker_${ id }` } //ID from the restaurant with marker. 
+						itemID={ this.state.selectedId } //ID from the item being searched
+				  	position={{lat: item.coordinates.latitude, lng: item.coordinates.longitude  }}
+				  	labelAnchor={new google.maps.Point(0, 0)}
+				  	key={ `marker_${ id }` } 
+				  	name={ item.name }
+				  	address={item.location.address1}
+				  	city={item.location.city}
+				  	state={item.location.state}
+				  	zipcode={item.location.zip_code}
+				  	imageSrc={item.image_url}
+				  	isSelected={ id === this.state.selectedId }
+					/>
+				);
+		});
+
+		console.log("coordinateItems", coordinateItems)
+		return coordinateItems;
+	} 
 
 
 	render() {
 
 		return (
 			<div className="App-container">
-			<div className="triangle"></div>
+				<div className="triangle"></div>
 			  <div className="logoBox"> 
-				<p className="logo_title">Begin the search for items here.</p>
+					<p className="logo_title">Begin the search for items here.</p>
 			  </div>
-
 				<SearchBar handleSearch={this._handleSearch} handleRequest={this._handleRequest} />
-
 			 	<div className="alignment">
-
 			 		<SearchResults term={this.state.term} response={ this.state.response } onItemClick={ this._onItemClick } />
-					<MapResults id={this.state.id} defaultzoom= {this.state.defaultZoom} center={ this.state.center } markers={this.state.response} selectedItemId={ this.state.selectedId } />
-			 	
+			 		<MarkerMap defaultzoom={this.state.defaultZoom} center={ this.state.center }>
+			 			{ this._getCoordinateItems() }
+			 		</MarkerMap>
 			 	</div>
-
 			</div>
 		);
 	}
