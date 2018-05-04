@@ -17,11 +17,13 @@ export default class App extends Component {
 				lat: 40.854131, 
 				lng: -73.886601
 			},
-			defaultZoom: 9
+			defaultZoom: 9,
+			id: '',
+			selectedId: '',
 		})
 	}
-
 	
+
 	_handleRequest = (term, location) => {
 		let corsProxy = 'http://localhost:3333';
 		let url = `https://api.yelp.com/v3/businesses/search?term=${term}&location=${location}&limit=10`;
@@ -46,10 +48,10 @@ export default class App extends Component {
 					lat: center.latitude, 
 					lng: center.longitude
 				},
-				defaultZoom: 11
+				defaultZoom: 11,
+				id: response.id
 			})
-
-		    console.log( this.state.response );
+		    console.log("Response: ", this.state.response );
 		})
 
 		.catch( ( error ) => {
@@ -57,6 +59,8 @@ export default class App extends Component {
 		})
 
 	}
+
+
 
 	_handleSearch = (event) => {
 		event.preventDefault();
@@ -71,17 +75,29 @@ export default class App extends Component {
 		})
 	}
 
+	_onItemClick = ( termId ) => ( event ) => {
+		this.setState({
+			selectedId: termId,
+		})
+	}
+
+
 	render() {
+
 		return (
 			<div className="App-container">
 			<div className="triangle"></div>
 			  <div className="logoBox"> 
 				<p className="logo_title">Begin the search for items here.</p>
 			  </div>
+
 				<SearchBar handleSearch={this._handleSearch} handleRequest={this._handleRequest} />
+
 			 	<div className="alignment">
-			 		<SearchResults term={this.state.term} response={ this.state.response } />
-					<MapResults  defaultzoom= {this.state.defaultZoom} center={ this.state.center } markers={this.state.response} />
+
+			 		<SearchResults term={this.state.term} response={ this.state.response } onItemClick={ this._onItemClick } />
+					<MapResults id={this.state.id} defaultzoom= {this.state.defaultZoom} center={ this.state.center } markers={this.state.response} selectedItemId={ this.state.selectedId } />
+			 	
 			 	</div>
 
 			</div>

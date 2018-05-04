@@ -6,8 +6,7 @@ export default class SearchResults extends Component {
 
 //work on getting a map element to display on click for a search result.
 	_getColor = ( rating ) => {
-
-
+		
 		if ( rating > 0 && rating < 2 ) {
 			return '#F0152D';
 		} else if (rating >=2 && rating < 3) {
@@ -23,14 +22,19 @@ export default class SearchResults extends Component {
 	}
 
 	render() {
-		const { response } = this.props;
+		const { response, onItemClick } = this.props;
 
 		const listItems = response.map(( item ) => {
 			const rating = item.rating;
-			//console.log(rating); debugging
+			const name = item.name;
+			const id = item.id; 
+
+			//console.log(rating); debugging'
+
+			//OnItemClick is grabbing the ID from the Parent app.js  when clicking on a searchresult item. 
 			return (
 				<li className="searchItem" key={ `Sumimasen_${ Math.random() * (new Date()) }` }> 
-					<span  className="searchName">{ item.name }</span>
+					<span  onClick={ onItemClick( id ) } className="searchName">{ name }</span>
 					<span className="rating" style={{ color: this._getColor( item.rating )}}>{ item.rating }</span>
 				</li>
 			)
