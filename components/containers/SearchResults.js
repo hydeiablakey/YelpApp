@@ -4,7 +4,10 @@ import SearchResultButtons from '../presentational/SearchResultButtons';
 
 export default class SearchResults extends Component {
 
-//work on getting a map element to display on click for a search result.
+/* _getColor
+1. Takes in a rating from the response and uses it to configure which color to return.
+2. Once a color is chosen based on the if/else statements, it executes this._getColor within the span element rating. 
+*/
 	_getColor = ( rating ) => {
 		
 		if ( rating > 0 && rating < 2 ) {
@@ -24,12 +27,15 @@ export default class SearchResults extends Component {
 	render() {
 		const { response, onItemClick } = this.props;
 
+		/* listItems
+		  1. Listitems is the map of responses for item.name and item.rating for each search result. 
+	      2. The onClick for name, will take in the onItemClick and pass the id for the searchResult item to the App comp.
+	      3.Displays a list(which is placed in an unordered list later) of name and ratings for each search result item. 
+		*/
 		const listItems = response.map(( item ) => {
 			const rating = item.rating;
 			const name = item.name;
 			const id = item.id; 
-
-			//console.log(rating); debugging'
 
 			//OnItemClick is grabbing the ID from the Parent app.js  when clicking on a searchresult item. 
 			return (
@@ -44,6 +50,12 @@ export default class SearchResults extends Component {
 		
 
 		//response will always exist as it's being passed down first as an empty array. 
+		/*
+		 1. This is checking if the response that is being passed is greater than 0. (Meaning if there is a response)
+			When there is a response, we want to show this container. 
+			If not, we want to return the default search container, as to avoid showing an empty box of search results. 
+			2. Listitems are displaying the results from the response which are item.name and item.rating within the unordered list
+		*/
 		if (response.length > 0) {
 			return (
 			<div className="Search_Results-Container">
@@ -56,6 +68,9 @@ export default class SearchResults extends Component {
 			)
 		} 
 
+		/*
+		This default search container is shown when there is no response being given in search results.
+		*/
 		return (
 			<div className="Default_search-container">
 				<p>Welcome to a default search message. </p>

@@ -7,6 +7,16 @@ import MapLocation from './MapLocation';
 import './App.less';
 
 
+/* 	States
+	Response: Takes an empty array because it's expecting to be filled by the request for locations. 
+	Term: Expecting a search term from the search bar. (Not Required.)
+	Location: Expecting a location term from the search bar. (Required)
+	Center: Corresponds to the center of the map from the API based on the search term. Accepts a Lat and Long. 
+	DefaultZoom: Amount that the map is zoomed in by default. 
+	SelectedId: The id currently being selected in the search results
+
+*/
+
 export default class App extends Component {
 	constructor() {
 		super()
@@ -15,14 +25,19 @@ export default class App extends Component {
 			term: "",
 			location: "",
 			center: { 
-				lat: 40.854131, 
-				lng: -73.886601
+				lat: 40.854131, //default location placed in NYC.
+				lng: -73.886601 //default location placed in NYC.
 			},
 			defaultZoom: 9,
 			selectedId: ''
 		})
 	}
 	
+	/*	_Handlerequest
+	1. Handlerequest is expecting a search term and a location to be passed into the url. 
+	2. Once a term and location is passed from the handleSearch function, it is concat onto the url for the api call.
+	3. Axios makes a get request based on the search term and responds with json.
+	*/
 
 	_handleRequest = (term, location) => {
 		let corsProxy = 'http://localhost:3333';
@@ -38,8 +53,9 @@ export default class App extends Component {
 		  responseType:'json'
 		})
 
-
-		//center corresponds to the center of the map from the API based on the search term. 
+		/*
+		1. Takes the response and sets the state to the new response provided by the API. 
+		*/
 		.then( ( response ) => {
 			let center = response.data.region.center;
 			this.setState({ 
@@ -50,14 +66,19 @@ export default class App extends Component {
 				},
 				defaultZoom: 11
 			})
-		    //console.log("Response: ", this.state.response );
+		    console.log("Response: ", this.state.response );
 		})
 
 		.catch( ( error ) => {
 			console.error( error );
 		})
-
 	}
+
+	/* _Handlesearch
+	1. Grabs the termQuery and locationQuery by tagName from the searchBar input value.
+	2. Passing in the termQuery and locationQuery from the searchBar to the handleRequest function. 
+	3. Setting the state to the new term and location queries. 
+	*/
 
 	_handleSearch = (event) => {
 		event.preventDefault();
@@ -72,12 +93,24 @@ export default class App extends Component {
 		})
 	}
 
+
+/* _onItemClick 
+1. Expecting a termId (SearchResultId) and it is performing a currying operation with event. 
+2. Setting the state to the termId which is grabbed from the SearchResults component when you click on a search result item.
+
+*/
 	_onItemClick = ( termId ) => ( event ) => {
 		this.setState({
 			selectedId: termId
 		})
 	}
 
+/* _getCoordinateItems (Originally was MapResults)
+
+1. Maps out each response search result to a marker item. 
+2. Passes several props to MapLocation which holds the functions for the marker items. 
+
+*/
 	_getCoordinateItems = () => {
 			const markers = this.state.response;
 			const coordinateItems = markers.map( ( item ) => {
